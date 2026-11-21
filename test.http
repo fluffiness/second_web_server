@@ -7,3 +7,55 @@ GET http://localhost:8080/app
 ###
 
 GET http://localhost:8080/healthz
+
+###
+
+GET http://localhost:8080/reset
+
+###
+
+GET http://localhost:8080/metrics
+
+### validate long
+
+POST http://localhost:8080/api/validate_chirp HTTP/1.1
+Content-Type: application/json
+
+{
+    "body": "This Chirp is too long. This Chirp is too long. This Chirp is too long. This Chirp is too long. This Chirp is too long. This Chirp is too long. This Chirp is too long."
+}
+
+### validate short
+POST http://localhost:8080/api/validate_chirp HTTP/1.1
+Content-Type: application/json
+
+{
+    "body": "This Chirp is not too long."
+}
+
+### validate profane
+POST http://localhost:8080/api/validate_chirp HTTP/1.1
+Content-Type: application/json
+
+{
+    "body": "This is a kerfuffle opinion I need to share with the world"
+}
+
+### create user 1
+POST http://localhost:8080/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "mloneusk@example.co"
+}
+
+### create user 2
+POST http://localhost:8080/api/users HTTP/1.1
+Content-Type: application/json
+
+{
+    "email": "dackjorsey@example.co"
+}
+
+### reset
+POST http://localhost:8080/admin/reset HTTP/1.1
