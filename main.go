@@ -54,9 +54,12 @@ func main() {
 	mux.HandleFunc("GET /admin/metrics/", cfg.handlerMetrics)    // Returns the number of accesses to the fileserver
 	mux.HandleFunc("POST /admin/reset/", cfg.handleMetricsReset) // Resets the access count and deletes all users. Only authorized on dev platforms.
 
-	mux.HandleFunc("GET /api/healthz/", handlerReadiness)        // Health check to see if the server is online
-	mux.HandleFunc("POST /api/validate_chirp/", handlerValidate) // Checks character count and removes profanity.
-	mux.HandleFunc("POST /api/users/", cfg.handlerCreateUser)    // Create a new user
+	mux.HandleFunc("GET /api/healthz/", handlerReadiness)            // Health check to see if the server is online
+	mux.HandleFunc("POST /api/validate_chirp/", handlerValidate)     // Checks character count and removes profanity.
+	mux.HandleFunc("POST /api/users/", cfg.handlerCreateUser)        // Create a new user
+	mux.HandleFunc("POST /api/chirps/", cfg.handlerCreateChirp)      // Create a new chirp
+	mux.HandleFunc("GET /api/chirps/", cfg.handlerGetChirps)         // Get all chirps ordered by created_at
+	mux.HandleFunc("GET /api/chirps/{chirpID}", cfg.handlerGetChirp) // Get chirp matching the id
 
 	srv := &http.Server{
 		Addr:    ":" + port,
