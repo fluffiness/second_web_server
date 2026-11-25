@@ -59,7 +59,7 @@ func main() {
 	mux.HandleFunc("POST /api/users/", cfg.handlerCreateUser)        // Create a new user
 	mux.HandleFunc("POST /api/chirps/", cfg.handlerCreateChirp)      // Create a new chirp
 	mux.HandleFunc("GET /api/chirps/", cfg.handlerGetChirps)         // Get all chirps ordered by created_at
-	mux.HandleFunc("GET /api/chirps/{chirpID}", cfg.handlerGetChirp) // Get chirp matching the id
+	mux.HandleFunc("GET /api/chirps/{chirpID}", cfg.handlerGetChirp) // Get chirp with id matching ChirpID
 
 	srv := &http.Server{
 		Addr:    ":" + port,
